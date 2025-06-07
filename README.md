@@ -86,7 +86,7 @@ function redirectToLogin(returnUri) {
 }
 ```
 
-# HostedUIでログイン成功→コールバックURLへリダイレクト
+# ログイン成功→コールバックURL
 
 HostedUIでログインするとCloudFrontのURLにリダイレクトされる。再度Lambda@Edgeが実行される。リクエストのURLは/callbackとなってる想定。ここで、state・nonce・PKCE検証を行う。
 
@@ -209,7 +209,7 @@ HostedUIでログインするとCloudFrontのURLにリダイレクトされる�
   }
 ```
 
-# ログアウトしたい
+# ログアウト
 
 ```js
   if (request.uri.startsWith("/logout")) {
