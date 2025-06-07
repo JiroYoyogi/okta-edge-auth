@@ -136,7 +136,6 @@ HostedUIでログインするとCloudFrontのURLにリダイレクトされる�
         redirect_uri: REDIRECT_URI,
         client_id: CLIENT_ID,
         code_verifier: codeVerifier,
-        client_secret: CLIENT_SECRET,
       }),
     });
     const tokenJson = await tokenRes.json();
@@ -238,6 +237,14 @@ HostedUIでログインするとCloudFrontのURLにリダイレクトされる�
 ```
 
 # zip（Lambdaアップロードのため）
+
+index.mjsの環境変数を埋める。パラメーターストアを使うとより安全
+
+```
+const OKTA_ISSUER = "";
+const CLIENT_ID = "";
+const REDIRECT_URI = "";
+```
 
 モジュールのインストール
 

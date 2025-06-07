@@ -15,7 +15,6 @@ const REDIRECT_URI = "";
 const JWKS_URL = `${OKTA_ISSUER}/v1/keys`; 
 const TOKEN_ENDPOINT = `${OKTA_ISSUER}/v1/token`;
 const LOGOUT_ENDPOINT = `${OKTA_ISSUER}/v1/logout`;
-const CLIENT_SECRET = "";
 
 let cachedJWKS = null;
 let cachedExpireAt = 0;
