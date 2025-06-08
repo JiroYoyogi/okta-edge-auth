@@ -11,6 +11,7 @@ const OKTA_ISSUER = "";
 const CLIENT_ID = "";
 // https://12345.cloudfront.net}/callback
 const REDIRECT_URI = "";
+const CLIENT_SECRET = "";
 // 公開鍵
 const JWKS_URL = `${OKTA_ISSUER}/v1/keys`; 
 const TOKEN_ENDPOINT = `${OKTA_ISSUER}/v1/token`;

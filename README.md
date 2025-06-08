@@ -136,6 +136,7 @@ HostedUIでログインするとCloudFrontのURLにリダイレクトされる�
         redirect_uri: REDIRECT_URI,
         client_id: CLIENT_ID,
         code_verifier: codeVerifier,
+        client_secret: CLIENT_SECRET,
       }),
     });
     const tokenJson = await tokenRes.json();
