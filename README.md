@@ -223,7 +223,7 @@ HostedUIでログインするとCloudFrontのURLにリダイレクトされる�
       headers: {
         // ログアウトURLにリクエスト
         // 誰がログアウトするのかIDトークンをクエリに付与
-        location: [{ key: "Location", value: `${LOGOUT_ENDPOINT}?id_token_hint=${idTokenFromCookie}` }],
+        location: [{ key: "Location", value: `${LOGOUT_ENDPOINT}?id_token_hint=${idTokenFromCookie}&post_logout_redirect_uri=${encodeURIComponent(REDIRECT_URI_LOGOUT)}` }],
         "set-cookie": [
           // クッキーに保存してたIDトークンを削除
           {

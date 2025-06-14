@@ -9,13 +9,16 @@ import jwkToPem from "jwk-to-pem";
 // https://trial-12345.okta.com/oauth2/default
 const OKTA_ISSUER = "";
 const CLIENT_ID = "";
-// https://12345.cloudfront.net}/callback
-const REDIRECT_URI = "";
+// https://12345.cloudfront.net
+const CLOUD_FRONT_DOMAIN = "";
 const CLIENT_SECRET = "";
+
 // 公開鍵
 const JWKS_URL = `${OKTA_ISSUER}/v1/keys`; 
 const TOKEN_ENDPOINT = `${OKTA_ISSUER}/v1/token`;
 const LOGOUT_ENDPOINT = `${OKTA_ISSUER}/v1/logout`;
+const REDIRECT_URI = `${CLOUD_FRONT_DOMAIN}/callback`;
+const REDIRECT_URI_LOGOUT = `${CLOUD_FRONT_DOMAIN}/`;
 
 let cachedJWKS = null;
 let cachedExpireAt = 0;
