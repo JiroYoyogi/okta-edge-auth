@@ -10,12 +10,14 @@ import jwkToPem from "jwk-to-pem";
 const OKTA_ISSUER = "";
 const CLIENT_ID = "";
 // https://12345.cloudfront.net/callback
-const REDIRECT_URI = "";
+const CLOUD_FRONT_DOMAIN = "";
 const CLIENT_SECRET = "";
 // 公開鍵
 const JWKS_URL = `${OKTA_ISSUER}/v1/keys`; 
 const TOKEN_ENDPOINT = `${OKTA_ISSUER}/v1/token`;
 const LOGOUT_ENDPOINT = `${OKTA_ISSUER}/v1/logout`;
+const REDIRECT_URI = `${CLOUD_FRONT_DOMAIN}/callback`;
+const REDIRECT_URI_LOGOUT = `${CLOUD_FRONT_DOMAIN}/`;
 
 let cachedJWKS = null;
 let cachedExpireAt = 0;
@@ -233,7 +235,7 @@ export const handler = async (event) => {
       headers: {
         // ログアウトURLにリクエスト
         // 誰がログアウトするのかIDトークンをクエリに付与
-        location: [{ key: "Location", value: `${LOGOUT_ENDPOINT}?id_token_hint=${idTokenFromCookie}` }],
+        location: [{ key: "Location", value: `${LOGOUT_ENDPOINT}?id_token_hint=${idTokenFromCookie}&post_logout_redirect_uri=${encodeURIComponent(REDIRECT_URI_LOGOUT)}` }],
         "set-cookie": [
           // クッキーに保存してたIDトークンを削除
           {
