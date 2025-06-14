@@ -248,7 +248,8 @@ index.mjsの環境変数を埋める。パラメーターストアを使うと�
 ```
 const OKTA_ISSUER = "";
 const CLIENT_ID = "";
-const REDIRECT_URI = "";
+const CLOUD_FRONT_DOMAIN = "";
+const CLIENT_SECRET = "";
 ```
 
 モジュールのインストール
