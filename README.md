@@ -263,3 +263,31 @@ zipする。index.mjsがあるディレクトリで下記コマンドを実行
 ```
 zip -r function.zip index.mjs package.json node_modules
 ```
+
+# ログアウトをNext.jsからSDKを使う方法に変更
+
+/logoutの処理を以下のように変更する。ログアウト処理をフロントに任せたためID_TOKENを削除するのみで良い
+
+```js
+  if (request.uri.startsWith("/logout")) {
+    // const idTokenFromCookie = cookies["ID_TOKEN"];
+    return {
+      status: "302",
+      headers: {
+        location: [{ key: "Location", value: "/" }],
+        "set-cookie": [
+          // クッキーに保存してたIDトークンを削除
+          {
+            key: "Set-Cookie",
+            value: cookie.serialize("ID_TOKEN", "", {
+              path: "/",
+              expires: new Date(0), // 期限切れはブラウザから削除される
+              httpOnly: true,
+              secure: true,
+            }),
+          },
+        ],
+      },
+    };
+  }
+```
