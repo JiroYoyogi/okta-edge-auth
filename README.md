@@ -115,7 +115,7 @@ HostedUIでログインするとCloudFrontのURLにリダイレクトされる�
     const stateTokenFromCookie = cookies["STATE"];
 
     if (!code || !state || !nonce || !codeVerifier || !stateTokenFromCookie) {
-      return callback(null, redirectToLogin("/"));
+      return redirectToLogin("/");
     }
 
     const stateJson = Buffer.from(state, "base64url").toString("utf-8");
@@ -124,7 +124,7 @@ HostedUIでログインするとCloudFrontのURLにリダイレクトされる�
     // state検証
     if (stateObj.stateToken !== stateTokenFromCookie) {
       console.log("CSRFトークン不一致！");
-      return callback(null, redirectToLogin("/"));
+      return redirectToLogin("/");
     }
 
     // 元ページに戻るURLを取得
@@ -208,7 +208,8 @@ HostedUIでログインするとCloudFrontのURLにリダイレクトされる�
       };
 
     } catch (err) {
-      return callback(null, redirectToLogin("/"));
+      console.log(err);
+      return redirectToLogin("/");
     }
   }
 ```
@@ -248,8 +249,8 @@ index.mjsの環境変数を埋める。パラメーターストアを使うと�
 ```
 const OKTA_ISSUER = "";
 const CLIENT_ID = "";
-const CLOUD_FRONT_DOMAIN = "";
 const CLIENT_SECRET = "";
+const CLOUD_FRONT_DOMAIN = "";
 ```
 
 モジュールのインストール

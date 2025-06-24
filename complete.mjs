@@ -9,9 +9,10 @@ import jwkToPem from "jwk-to-pem";
 // https://trial-12345.okta.com/oauth2/default
 const OKTA_ISSUER = "";
 const CLIENT_ID = "";
+const CLIENT_SECRET = "";
 // https://12345.cloudfront.net/callback
 const CLOUD_FRONT_DOMAIN = "";
-const CLIENT_SECRET = "";
+
 // 公開鍵
 const JWKS_URL = `${OKTA_ISSUER}/v1/keys`; 
 const TOKEN_ENDPOINT = `${OKTA_ISSUER}/v1/token`;
@@ -129,7 +130,7 @@ export const handler = async (event) => {
     const stateTokenFromCookie = cookies["STATE"];
 
     if (!code || !state || !nonce || !codeVerifier || !stateTokenFromCookie) {
-      return callback(null, redirectToLogin("/"));
+      return redirectToLogin("/");
     }
 
     const stateJson = Buffer.from(state, "base64url").toString("utf-8");
@@ -138,7 +139,7 @@ export const handler = async (event) => {
     // state検証
     if (stateObj.stateToken !== stateTokenFromCookie) {
       console.log("CSRFトークン不一致！");
-      return callback(null, redirectToLogin("/"));
+      return redirectToLogin("/");
     }
 
     // 元ページに戻るURLを取得
@@ -223,8 +224,8 @@ export const handler = async (event) => {
       };
 
     } catch (err) {
-      console.err(err);
-      return callback(null, redirectToLogin("/"));
+      console.log(err);
+      return redirectToLogin("/");
     }
   }
 
